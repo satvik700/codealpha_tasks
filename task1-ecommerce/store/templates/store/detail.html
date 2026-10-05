@@ -1,0 +1,7 @@
+{% extends "store/base.html" %}{% block title %}{{ p.name }}{% endblock %}{% block content %}
+<div class="detail"><img src="{{ p.image_url }}" alt="{{ p.name }}"><div>
+<h1>{{ p.name }}</h1><p class="price">₹{{ p.price }}</p><p>{{ p.description }}</p>
+<p>{% if p.stock %}{{ p.stock }} in stock{% else %}Out of stock{% endif %}</p>
+{% if p.stock %}<form method="post" action="{% url 'cart_add' p.pk %}">{% csrf_token %}
+<input type="number" name="qty" value="1" min="1" max="{{ p.stock }}"><button>Add to cart</button></form>{% endif %}
+</div></div>{% endblock %}

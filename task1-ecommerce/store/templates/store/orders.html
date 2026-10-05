@@ -1,0 +1,4 @@
+{% extends "store/base.html" %}{% block content %}<h1>My orders</h1>
+{% for o in orders %}<section class="order"><h2>Order #{{ o.id }} — ₹{{ o.total }}</h2><p>{{ o.created|date:"j M Y, H:i" }}</p>
+<ul>{% for i in o.items.all %}<li>{{ i.quantity }} × {{ i.product.name }}</li>{% endfor %}</ul></section>
+{% empty %}<p>No orders yet.</p>{% endfor %}{% endblock %}

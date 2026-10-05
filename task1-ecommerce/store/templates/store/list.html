@@ -1,0 +1,7 @@
+{% extends "store/base.html" %}{% block content %}
+<h1>{% if q %}Results for “{{ q }}”{% else %}All products{% endif %}</h1>
+<div class="grid">{% for p in products %}<article class="card">
+<a href="{% url 'product_detail' p.pk %}"><img src="{{ p.image_url }}" alt="{{ p.name }}"><h2>{{ p.name }}</h2></a>
+<p class="price">₹{{ p.price }}</p>
+<form method="post" action="{% url 'cart_add' p.pk %}">{% csrf_token %}<input type="hidden" name="next" value="{{ request.get_full_path }}"><button>Add to cart</button></form>
+</article>{% empty %}<p>No products found. Run <code>python manage.py seed</code>.</p>{% endfor %}</div>{% endblock %}

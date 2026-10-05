@@ -1,0 +1,5 @@
+{% extends "store/base.html" %}{% block content %}<h1>Checkout</h1>
+<ul>{% for i in items %}<li>{{ i.qty }} × {{ i.p.name }} — ₹{{ i.sub }}</li>{% endfor %}</ul>
+<p class="total">Total: ₹{{ total }}</p>
+<form method="post" class="form">{% csrf_token %}<label>Full name<input name="name" required></label>
+<label>Delivery address<textarea name="address" rows="3" required></textarea></label><button>Place order</button></form>{% endblock %}

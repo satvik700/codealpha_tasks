@@ -1,0 +1,7 @@
+{% extends "store/base.html" %}{% block content %}<h1>Your cart</h1>
+{% if items %}<table>{% for i in items %}<tr><td><a href="{% url 'product_detail' i.p.pk %}">{{ i.p.name }}</a></td>
+<td>₹{{ i.p.price }}</td><td><form method="post" action="{% url 'cart_update' i.p.pk %}">{% csrf_token %}
+<input type="number" name="qty" value="{{ i.qty }}" min="0" max="{{ i.p.stock }}"><button>Update</button></form></td>
+<td>₹{{ i.sub }}</td></tr>{% endfor %}</table>
+<p class="total">Total: ₹{{ total }}</p><a class="btn" href="{% url 'checkout' %}">Checkout</a>
+{% else %}<p>Your cart is empty. <a href="{% url 'product_list' %}">Browse products</a></p>{% endif %}{% endblock %}

@@ -1,0 +1,12 @@
+{% load static %}<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Marigold Goods{% endblock %}</title>
+<link rel="stylesheet" href="{% static 'store/style.css' %}"></head><body>
+<header><a class="logo" href="{% url 'product_list' %}">Marigold Goods</a>
+<form class="search" action="{% url 'product_list' %}"><input name="q" placeholder="Search products" value="{{ q }}"></form>
+<nav><a href="{% url 'cart' %}">Cart ({{ cart_count }})</a>
+{% if user.is_authenticated %}<a href="{% url 'orders' %}">My orders</a>
+<form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="link">Log out ({{ user.username }})</button></form>
+{% else %}<a href="{% url 'login' %}">Log in</a><a href="{% url 'register' %}">Register</a>{% endif %}</nav></header>
+<main>{% for m in messages %}<p class="msg">{{ m }}</p>{% endfor %}{% block content %}{% endblock %}</main>
+<script src="{% static 'store/app.js' %}"></script></body></html>
